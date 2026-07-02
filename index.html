@@ -1,0 +1,1064 @@
+---
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="og:image" content="https://nizarlahmar.com/assets/banner.png" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='75' font-family='monospace' fill='%239b6dcc'>0x</text></svg>">
+  <title>Nizar Lahmar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg:         #0c0c0c;
+      --bg2:        #111111;
+      --bg3:        #181818;
+      --border:     #262626;
+      --text:       #e8e8e8;
+      --text-body:  #b8b8b8;
+      --text-desc:  #888888;
+      --muted:      #555555;
+      --accent:     #9b6dcc;
+      --accent-dim: #5a3d7a;
+      --toggle-bg:  #1e1e1e;
+      --toggle-border: #333;
+    }
+
+    [data-theme="light"] {
+      --bg:         #f8f7f4;
+      --bg2:        #f0ede8;
+      --bg3:        #e8e4de;
+      --border:     #d4cfc8;
+      --text:       #1a1a1a;
+      --text-body:  #3a3a3a;
+      --text-desc:  #5a5a5a;
+      --muted:      #888880;
+      --accent:     #7c4dbb;
+      --accent-dim: #a87fd4;
+      --toggle-bg:  #ede9e3;
+      --toggle-border: #ccc8c0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 21px;
+      line-height: 1.75;
+      min-height: 100vh;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 36px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 56px 0 40px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .header-left {}
+
+    .name {
+      font-family: var(--mono);
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .tagline {
+      font-size: 16px;
+      color: var(--muted);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      font-family: var(--mono);
+    }
+
+    .theme-toggle {
+      background: var(--toggle-bg);
+      border: 1px solid var(--toggle-border);
+      border-radius: 2px;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      padding: 8px 14px;
+      text-transform: uppercase;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle:hover { color: var(--text); border-color: var(--muted); }
+
+    nav {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    nav::-webkit-scrollbar { display: none; }
+
+    .tab {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 16px;
+      letter-spacing: 0.05em;
+      padding: 18px 24px 16px;
+      text-transform: uppercase;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+
+    .tab:hover { color: var(--text); }
+
+    .tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .section { display: none; padding: 52px 0 80px; }
+    .section.active { display: block; }
+
+    .sec-label {
+      font-family: var(--mono);
+      font-size: 15px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      margin-bottom: 32px;
+    }
+
+    .about-body {
+      max-width: 660px;
+    }
+
+    .about-body p {
+      color: var(--text-body);
+      margin-bottom: 18px;
+      font-weight: 300;
+      font-size: 21px;
+    }
+
+    .about-body p:last-child { margin-bottom: 0; }
+
+    .about-meta {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+
+    .meta-item {
+      padding: 18px 24px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meta-item:nth-child(even) { border-right: none; }
+    .meta-item:nth-last-child(-n+2) { border-bottom: none; }
+
+    .meta-label {
+      font-family: var(--mono);
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .meta-value {
+      font-size: 19px;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .skill-group { margin-bottom: 40px; }
+
+    .skill-group-label {
+      font-family: var(--mono);
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--text-body);
+      font-family: var(--mono);
+      font-size: 16px;
+      padding: 6px 13px;
+    }
+
+    .tag.cert {
+      border-color: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .project {
+      border: 1px solid var(--border);
+      padding: 28px;
+      margin-bottom: 18px;
+      transition: border-color 0.15s;
+    }
+
+    [data-theme="dark"] .project:hover { border-color: #333; }
+    [data-theme="light"] .project:hover { border-color: #bbb; }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .project-title {
+      font-family: var(--mono);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .project-link {
+      font-family: var(--mono);
+      font-size: 15px;
+      color: var(--accent);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .project-desc {
+      color: var(--text-desc);
+      font-size: 19px;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 15px;
+      color: var(--muted);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 4px 10px;
+    }
+
+    /* ── Profiles ────────────────────────────────────── */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .profile-card {
+      border: 1px solid var(--border);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-decoration: none;
+      transition: border-color 0.15s;
+    }
+
+    [data-theme="dark"] .profile-card:hover { border-color: #444; }
+    [data-theme="light"] .profile-card:hover { border-color: #aaa; }
+    .profile-card:hover { text-decoration: none; }
+
+    .profile-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .profile-name {
+      font-family: var(--mono);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .profile-desc {
+      font-size: 15px;
+      color: var(--text-desc);
+      line-height: 1.65;
+    }
+
+    .profile-tag {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      margin-top: auto;
+    }
+
+    .more-block {
+      border-left: 2px solid var(--border);
+      padding-left: 24px;
+      margin-bottom: 40px;
+    }
+
+    .more-block-title {
+      font-family: var(--mono);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .more-block p {
+      color: var(--text-desc);
+      font-size: 20px;
+      line-height: 1.75;
+    }
+
+    .more-block a { color: var(--accent); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .contact-item {
+      background: var(--bg);
+      padding: 22px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-value {
+      font-size: 19px;
+      color: var(--accent);
+      font-family: var(--mono);
+    }
+
+    .resume-block {
+      border: 1px solid var(--accent-dim);
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .resume-block p {
+      font-size: 19px;
+      color: var(--muted);
+    }
+
+    .resume-btn {
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+      display: inline-block;
+    }
+
+    .resume-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+      text-decoration: none;
+    }
+
+    /* ── Contact Form ─────────────────────────────────── */
+    .contact-form {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-field label {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-field input,
+    .form-field textarea {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 0;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 300;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
+      resize: none;
+      -webkit-appearance: none;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-field textarea {
+      height: 140px;
+    }
+
+    .form-submit {
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      align-self: flex-start;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .form-submit:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .form-submit:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .form-status {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--accent);
+      min-height: 20px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      font-family: var(--mono);
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 20px; }
+      header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .about-meta { grid-template-columns: 1fr; }
+      .meta-item { border-right: none; }
+      .meta-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+      .meta-item:last-child { border-bottom: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .resume-block { flex-direction: column; align-items: flex-start; }
+      .project-header { flex-direction: column; gap: 6px; }
+      .profile-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <header>
+      <div class="header-left">
+        <div class="name">Nizar Lahmar (oxl0rd)</div>
+        <div class="tagline">Cybersecurity &nbsp;·&nbsp; Blue Team &nbsp;·&nbsp; Offensive Security</div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Light Mode</button>
+    </header>
+
+    <nav id="nav">
+  <button class="tab active" data-target="about">About</button>
+  <button class="tab" data-target="skills">Skills &amp; Certs</button>
+  <button class="tab" data-target="projects">Projects</button>
+  <button class="tab" data-target="blog">Blog / Notes</button>
+  <button class="tab" data-target="profiles">Profiles</button>
+  <button class="tab" data-target="more">More</button>
+  <button class="tab" data-target="contact">Contact</button>
+</nav>
+
+    <!-- ABOUT -->
+    <section class="section active" id="about">
+      <div class="sec-label">// about</div>
+      <div class="about-body">
+        <p>
+          Cybersecurity student at Full Sail University, graduating January 2027 with a B.S. in Cybersecurity.
+          Focused on both defensive and offensive security — building detection infrastructure, writing tools in C++,
+          and working through real-world attack scenarios in CTFs and labs.
+        </p>
+        <p>
+          I hold CompTIA A+, Security+, CySA+, eJPT, with the CCNA in progress.
+          My work spans SOC detection engineering, threat simulation, and systems-level tooling.
+        </p>
+        <p>
+          Fluent in English, French, and Arabic. Based in Winter Park, FL.
+        </p>
+      </div>
+      <div class="about-meta">
+        <div class="meta-item">
+          <div class="meta-label">Location</div>
+          <div class="meta-value">Winter Park, FL</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Degrees</div>
+          <div class="meta-value">B.S. Cybersecurity, 4.00 GPA<br>A.S. Information Technology, 4.00 GPA</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Availability</div>
+          <div class="meta-value">TBD</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS & CERTS -->
+    <section class="section" id="skills">
+      <div class="sec-label">// skills &amp; certifications</div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Certifications</div>
+        <div class="tag-list">
+          <span class="tag cert">CompTIA A+</span>
+          <span class="tag cert">CompTIA Security+</span>
+          <span class="tag cert">CompTIA CySA+</span>
+          <span class="tag cert">eJPT</span>
+          <span class="tag cert">CCNA — in progress</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Offensive Security</div>
+        <div class="tag-list">
+          <span class="tag">Penetration Testing</span>
+          <span class="tag">Web App Exploitation</span>
+          <span class="tag">Active Directory Attacks</span>
+          <span class="tag">Privilege Escalation</span>
+          <span class="tag">C2 Development</span>
+          <span class="tag">Payload Crafting</span>
+          <span class="tag">Evasion Techniques</span>
+          <span class="tag">CTF / HTB</span>
+          <span class="tag">Metasploit</span>
+          <span class="tag">Burp Suite</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Defensive Security</div>
+        <div class="tag-list">
+          <span class="tag">SIEM / Wazuh</span>
+          <span class="tag">Detection Engineering</span>
+          <span class="tag">Intrusion Detection</span>
+          <span class="tag">Threat Hunting</span>
+          <span class="tag">Incident Response</span>
+          <span class="tag">Vulnerability Assessment</span>
+          <span class="tag">Log Analysis</span>
+          <span class="tag">MITRE ATT&amp;CK</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">GRC &amp; Compliance</div>
+        <div class="tag-list">
+          <span class="tag">Security Policy Development</span>
+          <span class="tag">Risk Management</span>
+          <span class="tag">Access Control Frameworks</span>
+          <span class="tag">Data Classification</span>
+          <span class="tag">PCI DSS</span>
+          <span class="tag">GDPR</span>
+          <span class="tag">Least Privilege Principles</span>
+          <span class="tag">Vendor Risk Management</span>
+          <span class="tag">Change Management</span>
+          <span class="tag">Security Awareness</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Systems &amp; Low-Level</div>
+        <div class="tag-list">
+          <span class="tag">C++17</span>
+          <span class="tag">x86 Assembly</span>
+          <span class="tag">Memory Management</span>
+          <span class="tag">OS Internals</span>
+          <span class="tag">Binary Analysis</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Windows Internals</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Networking</div>
+        <div class="tag-list">
+          <span class="tag">TCP/IP</span>
+          <span class="tag">DNS / DHCP / HTTP(S)</span>
+          <span class="tag">Packet Analysis</span>
+          <span class="tag">Wireshark</span>
+          <span class="tag">Network Segmentation</span>
+          <span class="tag">Firewalls &amp; ACLs</span>
+          <span class="tag">VPN / Tunneling</span>
+          <span class="tag">Active Directory</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Tools &amp; Platforms</div>
+        <div class="tag-list">
+          <span class="tag">Kali Linux</span>
+          <span class="tag">Nmap</span>
+          <span class="tag">VirtualBox / QEMU/KVM</span>
+          <span class="tag">Azure</span>
+          <span class="tag">Git</span>
+          <span class="tag">VS Code</span>
+          <span class="tag">AI-Assisted Workflows</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Languages</div>
+        <div class="tag-list">
+          <span class="tag">C++</span>
+          <span class="tag">Python</span>
+          <span class="tag">Bash</span>
+          <span class="tag">PowerShell</span>
+          <span class="tag">x86 Assembly</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="sec-label">// projects</div>
+
+      <div class="project">
+        <div class="project-header">
+          <div class="project-title">C2 Framework</div>
+          <a class="project-link" href="https://github.com/nizarlahmar/basic-c2" target="_blank" rel="noopener">github ↗</a>
+        </div>
+        <div class="project-desc">
+          Custom command-and-control framework written in C++17. Implements encrypted communication channels,
+          modular payload architecture, and evasion-aware design. Built to study adversary tradecraft
+          and improve detection engineering on the blue team side.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">C++17</span>
+          <span class="project-tag">Offensive Tooling</span>
+          <span class="project-tag">Network Comms</span>
+          <span class="project-tag">Evasion</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <div class="project-title">SOC Detection Lab</div>
+          <a class="project-link" href="https://github.com/nizarlahmar/soc-lab" target="_blank" rel="noopener">writeup ↗</a>
+        </div>
+        <div class="project-desc">
+          Multi-VM homelab running Wazuh SIEM with custom detection rules mapped to MITRE ATT&amp;CK.
+          Simulated attack scenarios — credential dumping, lateral movement, persistence — then built
+          and tuned alerts to catch them. Documented end-to-end in a lab report.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Wazuh</span>
+          <span class="project-tag">MITRE ATT&amp;CK</span>
+          <span class="project-tag">Detection Engineering</span>
+          <span class="project-tag">VirtualBox</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <div class="project-title">Multi-VM Web Infrastructure Deployment</div>
+        </div>
+        <div class="project-desc">
+          Designed and deployed a multi-VM web infrastructure for a simulated law firm client.
+          Built a LAMP stack on Ubuntu hosting WordPress, and a separate Rocky Linux VM running
+          a Ghost blog on Docker behind an Nginx reverse proxy. Configured SSH access, custom
+          network topology, firewall rules, and inter-VM routing across the environment.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Linux</span>
+          <span class="project-tag">Ubuntu / Rocky Linux</span>
+          <span class="project-tag">LAMP Stack</span>
+          <span class="project-tag">Docker</span>
+          <span class="project-tag">Nginx</span>
+          <span class="project-tag">Hardening</span>
+          <span class="project-tag">SSH</span>
+          <span class="project-tag">Networking</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <div class="project-title">HTB / CTF Writeups</div>
+          <a class="project-link" href="#" target="_blank" rel="noopener">read ↗</a>
+        </div>
+        <div class="project-desc">
+          Ongoing documentation of Hack The Box machines and CTF challenges. Covers web exploitation,
+          privilege escalation, and more. Written to be technically precise and educational.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">HTB</span>
+          <span class="project-tag">Web Exploitation</span>
+          <span class="project-tag">Privilege Escalation</span>
+          <span class="project-tag">AD Attacks</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-header">
+          <div class="project-title">Enterprise Security Plan</div>
+        </div>
+        <div class="project-desc">
+          Collaborated on a full organizational security plan for a simulated e-commerce company.
+          Authored individual policy documents covering access control, acceptable use, and more.
+          Addressed regulatory requirements including PCI DSS and GDPR, defined roles and
+          responsibilities, and established exception handling with mitigating controls.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">GRC</span>
+          <span class="project-tag">Policy Development</span>
+          <span class="project-tag">PCI DSS</span>
+          <span class="project-tag">GDPR</span>
+          <span class="project-tag">Access Control</span>
+          <span class="project-tag">Risk Management</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- BLOG / NOTES -->
+    <section class="section" id="blog">
+      <div class="sec-label">// blog / notes</div>
+
+      {% if site.posts.size > 0 %}
+        {% for post in site.posts limit:5 %}
+          <article class="project">
+            <div class="project-header">
+              <div class="project-title">{{ post.title }}</div>
+              <a class="project-link" href="{{ post.url | relative_url }}">read ↗</a>
+            </div>
+
+            <div class="project-desc">
+              {% if post.excerpt %}
+                {{ post.excerpt | strip_html | truncate: 220 }}
+              {% else %}
+                No excerpt available yet.
+              {% endif %}
+            </div>
+
+            <div class="project-tags">
+              <span class="project-tag">{{ post.date | date: "%b %-d, %Y" }}</span>
+              {% if post.categories and post.categories.size > 0 %}
+                {% for category in post.categories limit:3 %}
+                  <span class="project-tag">{{ category }}</span>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <div class="project">
+          <div class="project-header">
+            <div class="project-title">No posts yet</div>
+          </div>
+          <div class="project-desc">
+            Writeups, study notes, and cybersecurity posts will appear here soon.
+          </div>
+        </div>
+      {% endif %}
+    </section>
+
+    <!-- PROFILES -->
+    <section class="section" id="profiles">
+      <div class="sec-label">// profiles</div>
+
+      <div class="profile-grid">
+
+        <a class="profile-card" href="https://app.hackthebox.com/users/1996983" target="_blank" rel="noopener">
+          <div class="profile-card-header">
+            <div class="profile-name">Hack The Box</div>
+            <div class="profile-handle">↗</div>
+          </div>
+          <div class="profile-desc">Active practice on HTB machines and challenges. Focus on Linux/Windows privilege escalation, web exploitation, and Active Directory.</div>
+          <div class="profile-tag">oxl0rd</div>
+        </a>
+
+        <a class="profile-card" href="https://hackerone.com/r3aloxl0rd" target="_blank" rel="noopener">
+          <div class="profile-card-header">
+            <div class="profile-name">HackerOne</div>
+            <div class="profile-handle">↗</div>
+          </div>
+          <div class="profile-desc">Bug bounty platform. Actively developing skills in responsible disclosure and real-world vulnerability research.</div>
+          <div class="profile-tag">r3aloxl0rd</div>
+        </a>
+
+        <a class="profile-card" href="https://github.com/nizarlahmar" target="_blank" rel="noopener">
+          <div class="profile-card-header">
+            <div class="profile-name">GitHub</div>
+            <div class="profile-handle">↗</div>
+          </div>
+          <div class="profile-desc">Source code for personal projects including the C2 framework, SOC lab documentation, and tooling written in C++ and Python.</div>
+          <div class="profile-tag">nizarlahmar</div>
+        </a>
+
+        <a class="profile-card" href="https://www.linkedin.com/in/nizar-lahmar" target="_blank" rel="noopener">
+          <div class="profile-card-header">
+            <div class="profile-name">LinkedIn</div>
+            <div class="profile-handle">↗</div>
+          </div>
+          <div class="profile-desc">Professional profile with full work history, certifications, and endorsements.</div>
+          <div class="profile-tag">nizar-lahmar</div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- MORE -->
+    <section class="section" id="more">
+      <div class="sec-label">// more about me</div>
+
+      <div class="more-block">
+        <div class="more-block-title">Philosophy</div>
+        <p>
+          I write about some philosophical subjects — everything from deep inquiries like questioning the study of philosophy itself, to more practical relevant things like poking holes in our understanding of validation.
+          Published on Substack: <a href="https://mathasophia.substack.com" target="_blank" rel="noopener">Mathasophia ↗</a>
+        </p>
+      </div>
+
+      <div class="more-block">
+        <div class="more-block-title">Guitar</div>
+        <p>
+          I love playing the guitar! Currently learning the Rick &amp; Morty "For the Damaged Coda" song.
+        </p>
+      </div>
+
+      <div class="more-block">
+        <div class="more-block-title">Writing</div>
+        <p>
+          I love writing, in general. Not only the aforementioned philosophy, but also screenplays, books and short stories.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="sec-label">// contact</div>
+ 
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">
+            <a href="https://linkedin.com/in/nizar-lahmar" target="_blank" rel="noopener">linkedin.com/in/nizar-lahmar ↗</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">
+            <a href="https://github.com/nizarlahmar" target="_blank" rel="noopener">github.com/nizarlahmar ↗</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Location</div>
+          <div class="contact-value" style="color: var(--muted);">Winter Park, FL</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Response time</div>
+          <div class="contact-value" style="color: var(--muted);">Within 48 hours</div>
+        </div>
+      </div>
+ 
+      <div class="contact-form" id="contactForm">
+        <input type="hidden" name="access_key" value="0b5bec79-b72f-4406-b291-4bb477655bb3" />
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" placeholder="Your name" autocomplete="off" />
+          </div>
+          <div class="form-field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" placeholder="your@email.com" autocomplete="off" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="cf-subject">Subject</label>
+          <input type="text" id="cf-subject" name="subject" placeholder="What's this about?" autocomplete="off" />
+        </div>
+        <div class="form-field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" placeholder="What's on your mind?"></textarea>
+        </div>
+        <button type="button" class="form-submit" id="formSubmit">Send Message</button>
+        <div class="form-status" id="formStatus"></div>
+      </div>
+
+      <div class="resume-block" style="margin-top: 32px;">
+        <p>Current resume(s) — updated June 2026</p>
+        <div class="resume-buttons">
+          <a class="resume-btn" href="/assets/Blue_Team.pdf" target="_blank" rel="noopener">Download BLUE TEAM Resume</a>
+          <a class="resume-btn" href="/assets/Red_Team.pdf" target="_blank" rel="noopener">Download RED TEAM Resume</a>
+        </div>
+      </div>
+
+    </section>
+
+    <footer>
+      <div class="wrap" style="padding: 0;">
+        nizarlahmar.com
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const sections = document.querySelectorAll('.section');
+    const toggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.target;
+        tabs.forEach(t => t.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+
+    toggle.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      toggle.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+    });
+
+    // Contact form
+    document.getElementById('formSubmit').addEventListener('click', async () => {
+      const name    = document.getElementById('cf-name').value.trim();
+      const email   = document.getElementById('cf-email').value.trim();
+      const subject = document.getElementById('cf-subject').value.trim();
+      const message = document.getElementById('cf-message').value.trim();
+      const status  = document.getElementById('formStatus');
+      const btn     = document.getElementById('formSubmit');
+
+      if (!name || !email || !subject || !message) {
+        status.textContent = 'Please fill in all fields.';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      status.textContent = '';
+
+      const key = document.querySelector('input[name="access_key"]').value;
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            access_key: key,
+            name, email, subject, message
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          status.textContent = 'Message sent.';
+          document.getElementById('cf-name').value = '';
+          document.getElementById('cf-email').value = '';
+          document.getElementById('cf-subject').value = '';
+          document.getElementById('cf-message').value = '';
+        } else {
+          status.textContent = 'Something went wrong. Try again.';
+        }
+      } catch {
+        status.textContent = 'Network error. Try again.';
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+    });
+  </script>
+
+</body>
+</html>
