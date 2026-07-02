@@ -1,5 +1,5 @@
 ---
-title: How I Passed eJPT
+title: How I Passed the eJPT
 layout: note
 categories:
   - certs
