@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +21,19 @@
       --accent-2: #8b5cf6;
       --maxw: 860px;
       --radius: 14px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    }
+
+    html[data-theme="light"] {
+      --bg: #f7f5ff;
+      --panel: #ffffff;
+      --panel-2: #f3efff;
+      --text: #161320;
+      --muted: #6f6787;
+      --line: #ddd4f3;
+      --accent: #7c3aed;
+      --accent-2: #5b21b6;
+      --shadow: 0 10px 30px rgba(80, 48, 140, 0.08);
     }
 
     * { box-sizing: border-box; }
@@ -33,6 +46,7 @@
       color: var(--text);
       font: 15px/1.8 "IBM Plex Mono", monospace;
       padding: 40px 20px 64px;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     .wrap {
@@ -40,9 +54,16 @@
       margin: 0 auto;
     }
 
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
     .back-link {
       display: inline-block;
-      margin-bottom: 18px;
       color: var(--muted);
       text-decoration: none;
     }
@@ -52,19 +73,44 @@
       text-decoration: underline;
     }
 
+    .theme-toggle {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.55rem 0.9rem;
+      font: 0.85rem "IBM Plex Mono", monospace;
+      cursor: pointer;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .theme-toggle:active {
+      transform: translateY(1px);
+    }
+
     .post-shell {
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: background-color 0.25s ease, border-color 0.25s ease;
     }
 
     .post-hero {
       padding: 28px 28px 22px;
       border-bottom: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(180, 140, 255, 0.06), rgba(180, 140, 255, 0.02)),
+        linear-gradient(180deg, rgba(180, 140, 255, 0.07), rgba(180, 140, 255, 0.02)),
         var(--panel);
+      transition: border-color 0.25s ease, background-color 0.25s ease;
     }
 
     .post-kicker {
@@ -144,12 +190,12 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 0.15rem 0.4rem;
-      color: #dcc8ff;
+      color: var(--accent-2);
       font: 0.95rem "IBM Plex Mono", monospace;
     }
 
     .post-body pre {
-      background: #070a11;
+      background: var(--panel-2);
       border: 1px solid var(--line);
       border-radius: 10px;
       padding: 16px;
@@ -161,7 +207,7 @@
       background: transparent;
       border: 0;
       padding: 0;
-      color: #e8ecff;
+      color: var(--text);
     }
 
     .post-body blockquote {
@@ -187,12 +233,17 @@
     }
 
     .post-body strong {
-      color: #ffffff;
+      color: var(--text);
     }
 
     @media (max-width: 640px) {
       body {
         padding: 20px 14px 40px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
       .post-hero,
@@ -212,7 +263,12 @@
 </head>
 <body>
   <div class="wrap">
-    <a class="back-link" href="/#blog">← back to site</a>
+    <div class="topbar">
+      <a class="back-link" href="/#blog">← back to site</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode">
+        light mode
+      </button>
+    </div>
 
     <article class="post-shell">
       <header class="post-hero">
@@ -228,5 +284,38 @@
       </section>
     </article>
   </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById("theme-toggle");
+      const saved = localStorage.getItem("post-theme");
+
+      if (saved === "light" || saved === "dark") {
+        root.setAttribute("data-theme", saved);
+      }
+
+      function updateButton() {
+        const current = root.getAttribute("data-theme") || "dark";
+        if (current === "light") {
+          btn.textContent = "dark mode";
+          btn.setAttribute("aria-label", "Switch to dark mode");
+        } else {
+          btn.textContent = "light mode";
+          btn.setAttribute("aria-label", "Switch to light mode");
+        }
+      }
+
+      btn.addEventListener("click", function () {
+        const current = root.getAttribute("data-theme") || "dark";
+        const next = current === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        localStorage.setItem("post-theme", next);
+        updateButton();
+      });
+
+      updateButton();
+    })();
+  </script>
 </body>
 </html>

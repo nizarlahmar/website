@@ -1,6 +1,6 @@
 ---
 title: How I Passed the eJPT
-layout: note
+layout: blog
 categories:
   - certs
   - hacking
@@ -28,7 +28,7 @@ I only had two weeks to cram so I couldn't afford paying for the voucher only an
 
 The learning material itself was very professional and well-structured. You could tell the instructor (Alexis Ahmed) knew what he was talking about, and the courses themselves (structured sequentially under the Penetration Testing Student learning path) are properly organized.
 
-Some of the content was definitely slightly repetitive, but not only is that unavoidable, but the individual courses are also supposed to be self-sufficient and independent to some extent, so it's understandable.
+Some of the content was definitely slightly repetitive, but not only is some of that unavoidable, but the individual courses are also supposed to be self-sufficient and independent to some extent, so it's understandable.
 
 ## Note Structure
 
