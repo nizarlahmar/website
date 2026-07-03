@@ -20,7 +20,7 @@
       --accent: #b48cff;
       --accent-2: #8b5cf6;
       --maxw: 860px;
-      --radius: 14px;
+      --radius: 0px;
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
     }
 
@@ -78,7 +78,7 @@
       border: 1px solid var(--line);
       background: var(--panel);
       color: var(--text);
-      border-radius: 999px;
+      border-radius: 0;
       padding: 0.55rem 0.9rem;
       font: 0.85rem "IBM Plex Mono", monospace;
       cursor: pointer;
@@ -188,7 +188,7 @@
     .post-body code {
       background: var(--panel-2);
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 0px;
       padding: 0.15rem 0.4rem;
       color: var(--accent-2);
       font: 0.95rem "IBM Plex Mono", monospace;
@@ -197,7 +197,7 @@
     .post-body pre {
       background: var(--panel-2);
       border: 1px solid var(--line);
-      border-radius: 10px;
+      border-radius: 0px;
       padding: 16px;
       overflow-x: auto;
       margin: 1.2rem 0;
@@ -226,7 +226,7 @@
 
     .post-body img {
       max-width: 100%;
-      border-radius: 10px;
+      border-radius: 0px;
       border: 1px solid var(--line);
       display: block;
       margin: 1.2rem 0;
@@ -266,7 +266,7 @@
     <div class="topbar">
       <a class="back-link" href="/#blog">← back to site</a>
       <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode">
-        light mode
+        LIGHT MODE
       </button>
     </div>
 
@@ -298,10 +298,10 @@
       function updateButton() {
         const current = root.getAttribute("data-theme") || "dark";
         if (current === "light") {
-          btn.textContent = "dark mode";
+          btn.textContent = "DARK MODE";
           btn.setAttribute("aria-label", "Switch to dark mode");
         } else {
-          btn.textContent = "light mode";
+          btn.textContent = "LIGHT MODE";
           btn.setAttribute("aria-label", "Switch to light mode");
         }
       }
